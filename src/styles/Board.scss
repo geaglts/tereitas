@@ -129,3 +129,44 @@
         row-gap: 12px;
     }
 }
+
+.Board__Confirm--Remove {
+    display: grid;
+    row-gap: 20px;
+    place-items: center;
+    width: 500px;
+    margin-bottom: 16px;
+
+    .Icon {
+        $size: 80px;
+        width: $size;
+        height: $size;
+        padding: 8px;
+        color: var(--color-red);
+        border: 3px solid var(--color-red);
+        border-radius: $size;
+    }
+
+    .Label {
+        font-size: var(--font-size-md);
+        text-align: center;
+    }
+
+    .Button {
+        width: 180px;
+        height: 40px;
+        border: none;
+        border-radius: 4px;
+        color: var(--color-light);
+        background-color: var(--color-red);
+        font-size: var(--font-size-md);
+        cursor: pointer;
+        transition: all 350ms ease;
+
+        &:hover {
+            transition: all 250ms ease;
+            color: var(--color-red);
+            background-color: var(--color-dark);
+        }
+    }
+}
