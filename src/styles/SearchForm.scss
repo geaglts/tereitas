@@ -1,0 +1,69 @@
+@use './vars';
+
+.SearchForm {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr auto;
+    border: 1px solid var(--color-green);
+    border-radius: 5px;
+    overflow: hidden;
+
+    input {
+        border: none;
+        height: inherit;
+        outline: none;
+        padding-left: 10px;
+        font-family: var(--form-secondary);
+        font-size: var(--font-size-md);
+        padding: 8px 0;
+        padding-left: 10px;
+    }
+
+    button {
+        border: none;
+        height: 40px;
+        width: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        svg {
+            font-size: var(--font-size-md);
+        }
+    }
+}
+
+.SearchForm.light {
+    input {
+        background-color: var(--color-light);
+        color: var(--color-dark);
+    }
+
+    button {
+        background-color: var(--color-light);
+    }
+}
+
+.SearchForm.dark {
+    input {
+        background-color: var(--color-dark);
+        color: var(--color-light);
+        &::placeholder {
+            color: var(--color-green);
+        }
+    }
+
+    button {
+        background-color: var(--color-dark);
+        svg {
+            color: var(--color-green);
+        }
+        &:hover {
+            background-color: var(--color-green);
+            svg {
+                color: var(--color-dark);
+            }
+        }
+    }
+}

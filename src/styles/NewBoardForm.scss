@@ -1,0 +1,36 @@
+.NewBoardForm {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    width: 350px;
+    row-gap: 10px;
+
+    input {
+        border: none;
+        height: 40px;
+        border-radius: 5px;
+
+        &[type='text'] {
+            font-size: 12pt;
+            color: var(--color-dark);
+            padding: 8px;
+            &::placeholder {
+                color: var(--color-green);
+            }
+        }
+
+        &[type='submit'] {
+            background-color: var(--color-green);
+            color: var(--color-light);
+            font-weight: bold;
+            font-size: 14pt;
+            cursor: pointer;
+            transition: background-color 350ms ease;
+            &:hover {
+                transition: background-color 250ms ease;
+                background-color: var(--color-dark);
+                color: var(--color-green);
+            }
+        }
+    }
+}

@@ -1,0 +1,94 @@
+@use './vars';
+
+.task__button {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+
+.Task {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    height: auto;
+    width: 100%;
+    border-radius: 8px;
+    font-size: var(--font-size-md);
+    overflow: hidden;
+    box-shadow: 2px 2px 4px rgba(#333, 0.1);
+    background-color: var(--color-light);
+
+    &__Button {
+        &--complete {
+            height: 100%;
+            width: 28px;
+            @extend .task__button;
+
+            &.waiting {
+                background-color: var(--color-red);
+            }
+
+            &.completed {
+                background-color: var(--color-green);
+            }
+        }
+
+        &--delete {
+            @extend .task__button;
+            padding: 8px;
+            color: var(--color-red);
+
+            svg {
+                font-size: var(--font-size-md);
+            }
+        }
+    }
+
+    &__Description {
+        margin-left: 8px;
+        padding: 12px 0;
+        color: var(--color-dark);
+
+        &.completed {
+            text-decoration: line-through;
+        }
+    }
+}
+
+.Confirm {
+    display: grid;
+    width: 300px;
+    row-gap: 20px;
+    place-items: center;
+
+    &__Icon {
+        $size: 70px;
+        color: var(--color-red);
+        width: $size;
+        height: $size;
+        padding: 12px;
+        border-radius: $size;
+        border: 2px solid var(--color-red);
+    }
+
+    &__Label {
+        font-size: var(--font-size-md);
+    }
+
+    &__Button--confirm {
+        @extend .task__button;
+        height: 40px;
+        width: 150px;
+        border-radius: 4px;
+        background-color: var(--color-red);
+        text-transform: capitalize;
+        font-size: var(--font-size-md);
+        color: var(--color-light);
+        transition: all 350ms ease;
+
+        &:hover {
+            transition: all 250ms ease;
+            background-color: var(--color-dark);
+            color: var(--color-red);
+        }
+    }
+}

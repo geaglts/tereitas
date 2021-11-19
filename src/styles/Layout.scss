@@ -1,0 +1,50 @@
+@use 'vars';
+
+.Layout {
+    min-height: 100vh;
+    width: 100%;
+    padding: 50px;
+    overflow: hidden;
+
+    .Layout__ChangeTheme {
+        $position: 25px;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        position: absolute;
+        right: $position;
+        top: $position;
+
+        svg {
+            font-size: var(--font-size-lg);
+        }
+    }
+}
+
+.Layout.light {
+    background-color: var(--color-light);
+    color: var(--color-dark);
+
+    .Layout__ChangeTheme {
+        svg {
+            color: var(--color-dark);
+        }
+    }
+}
+
+.Layout.dark {
+    background-color: var(--color-dark);
+    color: var(--color-green);
+
+    .Layout__ChangeTheme {
+        svg {
+            color: var(--color-green);
+        }
+    }
+}
+
+@media (max-width: 720px) {
+    .Layout {
+        padding: 20px;
+    }
+}
