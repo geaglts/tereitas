@@ -2,7 +2,7 @@
 
 .Board {
     display: grid;
-    grid-template-rows: 100px auto;
+    grid-template-rows: auto auto;
     border: 1px solid var(--color-green);
     border-radius: 4px;
     padding: 10px;
@@ -14,6 +14,15 @@
         grid-auto-columns: auto;
         grid-auto-flow: column;
         align-items: center;
+        column-gap: 12px;
+
+        h2 {
+            font-family: var(--font-secondary);
+            font-size: var(--font-size-lg);
+            &::first-letter {
+                color: var(--color-green);
+            }
+        }
 
         .RemoveBoard__Button {
             justify-self: end;
@@ -24,13 +33,16 @@
 
             svg {
                 color: var(--color-red);
-                font-size: var(--font-size-md);
+                font-size: var(--font-size-lg);
             }
         }
 
         p {
             align-self: start;
+            text-transform: none;
             font-size: var(--font-size-md);
+            font-weight: 400;
+            color: var(--color-dark);
         }
 
         .AddTask__Button {
@@ -167,6 +179,37 @@
             transition: all 250ms ease;
             color: var(--color-red);
             background-color: var(--color-dark);
+        }
+    }
+}
+
+@media (max-width: 1280px) {
+    .Board {
+        .Board__Header {
+            grid-template-columns: auto auto;
+            grid-template-rows: auto auto auto;
+            grid-template-areas:
+                'title delete'
+                'description description'
+                'add-task add-task';
+            row-gap: 8px;
+
+            .RemoveBoard__Button {
+                grid-area: delete;
+            }
+
+            h2 {
+                grid-area: title;
+            }
+
+            p {
+                grid-area: description;
+            }
+
+            .AddTask__Button {
+                grid-area: add-task;
+                width: 100%;
+            }
         }
     }
 }
