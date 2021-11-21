@@ -5,26 +5,32 @@
     grid-template-rows: auto auto;
     border: 1px solid var(--color-green);
     border-radius: 4px;
+    min-height: 200px;
     padding: 10px;
 
     .Board__Header {
-        text-transform: capitalize;
         display: grid;
-        grid-template-rows: repeat(2, 50px);
-        grid-auto-columns: auto;
-        grid-auto-flow: column;
-        align-items: center;
-        column-gap: 12px;
+        min-height: 137px;
+        grid-template-columns: auto auto;
+        grid-template-rows: auto auto auto;
+        grid-template-areas:
+            'title delete'
+            'description description'
+            'add-task add-task';
+        gap: 12px;
 
         h2 {
+            grid-area: title;
             font-family: var(--font-secondary);
             font-size: var(--font-size-lg);
             &::first-letter {
                 color: var(--color-green);
+                text-transform: capitalize;
             }
         }
 
         .RemoveBoard__Button {
+            grid-area: delete;
             justify-self: end;
             color: AddTask__Button;
             padding: 4px 3px 4px 4px;
@@ -38,18 +44,17 @@
         }
 
         p {
+            grid-area: description;
             align-self: start;
-            text-transform: none;
             font-size: var(--font-size-md);
             font-weight: 400;
             color: var(--color-dark);
         }
 
         .AddTask__Button {
+            grid-area: add-task;
             border: none;
-            justify-self: end;
             display: flex;
-            width: 130px;
             align-items: center;
             justify-content: center;
             background-color: transparent;
@@ -179,37 +184,6 @@
             transition: all 250ms ease;
             color: var(--color-red);
             background-color: var(--color-dark);
-        }
-    }
-}
-
-@media (max-width: 1280px) {
-    .Board {
-        .Board__Header {
-            grid-template-columns: auto auto;
-            grid-template-rows: auto auto auto;
-            grid-template-areas:
-                'title delete'
-                'description description'
-                'add-task add-task';
-            row-gap: 8px;
-
-            .RemoveBoard__Button {
-                grid-area: delete;
-            }
-
-            h2 {
-                grid-area: title;
-            }
-
-            p {
-                grid-area: description;
-            }
-
-            .AddTask__Button {
-                grid-area: add-task;
-                width: 100%;
-            }
         }
     }
 }
