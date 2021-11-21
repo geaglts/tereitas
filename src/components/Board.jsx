@@ -9,9 +9,11 @@ import Modal from 'components/Modal';
 
 const Board = ({ id, name = 'name', description = 'description', tasks = [] }) => {
     const form = useRef(null);
-    const { removeBoard, addTask } = useContext(AppContext);
+    const { removeBoard, addTask, state } = useContext(AppContext);
     const [newTaskForm, setNewTaskForm] = useState(null);
     const [confirmRemoveBoard, setConfirmRemoveBoard] = useState(false);
+
+    const themeClass = state.darkTheme ? ' dark' : '';
 
     const handleNewTaskForm = () => {
         setNewTaskForm(!newTaskForm);
@@ -37,7 +39,7 @@ const Board = ({ id, name = 'name', description = 'description', tasks = [] }) =
 
     return (
         <>
-            <section className="Board">
+            <section className={`Board${themeClass}`}>
                 <div className="Board__Header">
                     <h2>{name}</h2>
                     <p>{description}</p>

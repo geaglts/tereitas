@@ -10,7 +10,7 @@
     .Board__Header {
         display: grid;
         grid-template-columns: auto auto;
-        grid-template-rows: 35px auto 50px;
+        grid-template-rows: auto auto 50px;
         grid-template-areas:
             'title delete'
             'description description'
@@ -58,6 +58,7 @@
         .AddTask__Button {
             grid-area: add-task;
             border: none;
+            align-self: center;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -68,7 +69,6 @@
             padding: 12px 0;
             cursor: pointer;
             border-radius: 8px;
-            transition: all 250ms ease-in;
             height: 40px;
 
             svg {
@@ -76,9 +76,7 @@
             }
 
             &:hover {
-                transition: all 150ms ease-in;
-                background-color: var(--color-blue);
-                color: var(--color-light);
+                outline: 2px solid var(--color-light);
             }
         }
     }
@@ -148,6 +146,33 @@
         align-self: start;
         display: grid;
         row-gap: 12px;
+    }
+
+    &.dark {
+        .Board__Header {
+            gap: 8px;
+            p {
+                color: var(--color-light);
+            }
+        }
+
+        .NewTask {
+            background-color: rgba(#efe9f4, 0.05);
+
+            &__Button {
+                &:hover {
+                    outline: 2px solid var(--color-green);
+                }
+            }
+
+            &__Form {
+                input[type='submit'] {
+                    &:hover {
+                        outline: 2px solid var(--color-green);
+                    }
+                }
+            }
+        }
     }
 }
 
