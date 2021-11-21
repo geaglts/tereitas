@@ -6,9 +6,11 @@ import AppContext from 'contexts/AppContext';
 import Modal from 'components/Modal';
 
 const Task = ({ id: taskId, task, completed, boardId }) => {
-    const { changeTaskStatus, removeTask } = useContext(AppContext);
+    const { changeTaskStatus, removeTask, state } = useContext(AppContext);
     const [confirmRemoveTask, setConfirmRemoveTask] = useState(false);
     const statusClass = completed ? ' completed' : ' waiting';
+
+    const themeClass = state.darkTheme ? ' Dark' : '';
 
     const handleConfirmRemoveTask = () => {
         setConfirmRemoveTask(!confirmRemoveTask);
@@ -24,7 +26,7 @@ const Task = ({ id: taskId, task, completed, boardId }) => {
 
     return (
         <>
-            <div className="Task">
+            <div className={`Task${themeClass}`}>
                 <button className={`Task__Button--complete${statusClass}`} onClick={handleCompleteTask}></button>
                 <p className={`Task__Description${statusClass}`}>{task}</p>
                 <button className="Task__Button--delete" onClick={handleConfirmRemoveTask}>

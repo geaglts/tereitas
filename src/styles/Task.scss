@@ -43,7 +43,7 @@
 
             &:hover {
                 svg {
-                    color: var(--color-dark);
+                    color: var(--color-blue);
                 }
             }
         }
@@ -56,6 +56,15 @@
 
         &.completed {
             text-decoration: line-through;
+        }
+    }
+
+    &.Dark {
+        background-color: var(--color-dark);
+        box-shadow: 0 2px 8px 1px rgba(white, 0.07);
+
+        .Task__Description {
+            color: var(--color-light);
         }
     }
 }
