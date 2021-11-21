@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
-    width: 350px;
+    width: 360px;
     row-gap: 10px;
 
     input {
@@ -32,5 +32,11 @@
                 color: var(--color-green);
             }
         }
+    }
+}
+
+@media (max-width: 720px) {
+    .NewBoardForm {
+        width: 80vw;
     }
 }
