@@ -31,6 +31,7 @@ const Board = ({ id, name = 'name', description = 'description', tasks = [] }) =
         const data = { task: formData.get('task') };
         if (data.task.length > 0) {
             addTask(id, data);
+            form.current.reset();
         }
     };
 

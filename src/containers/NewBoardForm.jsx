@@ -12,6 +12,7 @@ const NewBoardForm = () => {
         const formData = new FormData(form.current);
         const data = { name: formData.get('name'), description: formData.get('description') };
         addBoard(data);
+        form.current.reset();
     };
 
     return (
