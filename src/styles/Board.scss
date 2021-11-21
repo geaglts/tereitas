@@ -2,7 +2,7 @@
 
 .Board {
     display: grid;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto auto 1fr;
     border: 1px solid var(--color-green);
     border-radius: 4px;
     padding: 10px;
@@ -38,6 +38,12 @@
             svg {
                 color: var(--color-red);
                 font-size: var(--font-size-lg);
+            }
+
+            &:hover {
+                svg {
+                    color: var(--color-dark);
+                }
             }
         }
 

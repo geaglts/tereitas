@@ -40,6 +40,12 @@
             svg {
                 font-size: var(--font-size-md);
             }
+
+            &:hover {
+                svg {
+                    color: var(--color-dark);
+                }
+            }
         }
     }
 
