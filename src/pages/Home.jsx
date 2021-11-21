@@ -11,16 +11,22 @@ import SearchForm from 'components/SearchForm';
 
 import AppContext from 'contexts/AppContext';
 
+const filterBoardsByName = (searchedValue) => (boards) => {
+    const nameIncludeSearchedValue = boards.name.toLowerCase().includes(searchedValue.toLowerCase());
+    return nameIncludeSearchedValue;
+};
+
 const Home = () => {
-    const [addBoardFormStatus, setAddFormStatus] = useState(false);
     const { state } = useContext(AppContext);
+    const [searchedValue, setSearchedValue] = useState('');
+    const [addBoardFormStatus, setAddFormStatus] = useState(false);
 
     const handleAddBoardForm = () => {
         setAddFormStatus(!addBoardFormStatus);
     };
 
-    const onSearch = (data) => {
-        console.log(data);
+    const onChangeSearchedValue = (event) => {
+        setSearchedValue(event.target.value);
     };
 
     return (
@@ -31,13 +37,13 @@ const Home = () => {
                     <p>Administra tus tareitas pendientes</p>
                 </header>
                 <div className="Actions">
-                    <SearchForm onSearch={onSearch} />
+                    <SearchForm onChange={onChangeSearchedValue} />
                     <button className="Actions__NewBoard" onClick={handleAddBoardForm}>
                         <MdOutlinePostAdd /> Nueva tablita
                     </button>
                 </div>
                 <div className="BoardContainer">
-                    {state.boards.map((board) => (
+                    {state.boards.filter(filterBoardsByName(searchedValue)).map((board) => (
                         <Board key={board.id} {...board} />
                     ))}
                 </div>
