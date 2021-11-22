@@ -1,0 +1,22 @@
+@use 'vars';
+
+.FormError__Container {
+    border: 2px solid var(--color-red);
+    padding: 12px;
+    background-color: rgba(#ee6352, 0.1);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: 12px;
+    .FormError__Icon {
+        $size: 30px;
+        width: $size;
+        height: $size;
+        color: var(--color-red);
+    }
+    .FormError__Error {
+        font-size: var(--font-size-ssm);
+        font-weight: bold;
+        color: var(--color-red);
+    }
+}
