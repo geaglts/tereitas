@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import AppContext from 'contexts/AppContext';
 import { BsTrash, BsFillPlusCircleFill } from 'react-icons/bs';
 import { MdClose } from 'react-icons/md';
@@ -10,10 +10,23 @@ import Modal from 'components/Modal';
 const Board = ({ id, name = 'name', description = 'description', tasks = [] }) => {
     const form = useRef(null);
     const { removeBoard, addTask, state } = useContext(AppContext);
-    const [newTaskForm, setNewTaskForm] = useState(null);
+    const [newTaskForm, setNewTaskForm] = useState(false);
     const [confirmRemoveBoard, setConfirmRemoveBoard] = useState(false);
 
     const themeClass = state.darkTheme ? ' dark' : '';
+
+    useEffect(() => {
+        const onEscPress = (event) => {
+            if (event.code === 'Escape' && newTaskForm) {
+                setNewTaskForm(false);
+            }
+        };
+        window.addEventListener('keyup', onEscPress);
+
+        return () => {
+            window.removeEventListener('keyup', onEscPress);
+        };
+    }, [newTaskForm]);
 
     const handleNewTaskForm = () => {
         setNewTaskForm(!newTaskForm);

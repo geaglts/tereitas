@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useState } from 'react';
+import React, { useRef, useContext } from 'react';
 import 'styles/NewBoardForm.scss';
 import validate from 'utils/validate';
 import NewBoardFormSchema from 'validations/newBoardForm.validation';
