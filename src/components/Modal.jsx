@@ -18,7 +18,7 @@ const Modal = ({ children, isActive, changeStatus }) => {
 
     if (isActive) {
         return createPortal(
-            <div className={`Modal${themeClass}`} onClick={closeModalWithBackground}>
+            <div className={`Modal${themeClass}`} onMouseDown={closeModalWithBackground}>
                 <div className="Modal__Content">
                     <MdClose className="Modal__Content--Close" onClick={changeStatus} />
                     {children}
