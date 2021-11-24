@@ -1,28 +1,30 @@
 import React, { useRef, useContext } from 'react';
 import 'styles/NewBoardForm.scss';
+
 import validate from 'utils/validate';
-import NewBoardFormSchema from 'validations/newBoardForm.validation';
-import useError from 'hooks/useError';
+import { createBoardSchema } from 'schemas/board.schema';
+
+import AppContext from 'contexts/AppContext';
 
 import FormError from 'components/FormError';
 
-import AppContext from 'contexts/AppContext';
+import useError from 'hooks/useError';
 
 const NewBoardForm = () => {
     const form = useRef(null);
     const { addBoard } = useContext(AppContext);
     const { error, newError } = useError();
 
-    const onSubmitForm = (event) => {
+    const onSubmitForm = async (event) => {
         event.preventDefault();
         const formData = new FormData(form.current);
         const data = { name: formData.get('name'), description: formData.get('description') };
-        const validData = validate({ data, schema: NewBoardFormSchema });
-        if (validData.approved) {
-            addBoard(data);
+        const validatedData = await validate({ data, schema: createBoardSchema });
+        if (validatedData.approved) {
+            addBoard(validatedData.data);
             form.current.reset();
         } else {
-            newError(validData.message);
+            newError(validatedData.message);
         }
     };
 

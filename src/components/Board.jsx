@@ -4,6 +4,11 @@ import { BsTrash, BsFillPlusCircleFill } from 'react-icons/bs';
 import { MdClose } from 'react-icons/md';
 import 'styles/Board.scss';
 
+import validate from 'utils/validate';
+import { createTaskSchema } from 'schemas/task.schema.js';
+import useError from 'hooks/useError';
+import FormError from 'components/FormError';
+
 import Task from 'components/Task';
 import Modal from 'components/Modal';
 
@@ -12,6 +17,7 @@ const Board = ({ id, name = 'name', description = 'description', tasks = [] }) =
     const { removeBoard, addTask, state } = useContext(AppContext);
     const [newTaskForm, setNewTaskForm] = useState(false);
     const [confirmRemoveBoard, setConfirmRemoveBoard] = useState(false);
+    const { error, newError } = useError();
 
     const themeClass = state.darkTheme ? ' dark' : '';
 
@@ -22,7 +28,6 @@ const Board = ({ id, name = 'name', description = 'description', tasks = [] }) =
             }
         };
         window.addEventListener('keyup', onEscPress);
-
         return () => {
             window.removeEventListener('keyup', onEscPress);
         };
@@ -40,13 +45,16 @@ const Board = ({ id, name = 'name', description = 'description', tasks = [] }) =
         removeBoard({ id });
     };
 
-    const onClickAddTask = (event) => {
+    const onClickAddTask = async (event) => {
         event.preventDefault();
         const formData = new FormData(form.current);
         const data = { task: formData.get('task') };
-        if (data.task.length > 0) {
+        const validatedData = await validate({ schema: createTaskSchema, data });
+        if (validatedData.approved) {
             addTask(id, data);
             form.current.reset();
+        } else {
+            newError(validatedData.message);
         }
     };
 
@@ -69,6 +77,7 @@ const Board = ({ id, name = 'name', description = 'description', tasks = [] }) =
                         <button className="NewTask__Button" onClick={handleNewTaskForm}>
                             <MdClose />
                         </button>
+                        {error.status && <FormError error={error.message} />}
                         <form onSubmit={onClickAddTask} className="NewTask__Form" ref={form}>
                             <input type="text" name="task" placeholder="Los que necesito hacer es..." />
                             <input type="submit" value="Agregar a la lista" />

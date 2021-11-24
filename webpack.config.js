@@ -23,6 +23,7 @@ module.exports = {
             styles: path.join(__dirname, 'src', 'styles'),
             utils: path.join(__dirname, 'src', 'utils'),
             validations: path.join(__dirname, 'src', 'validations'),
+            schemas: path.join(__dirname, 'src', 'schemas'),
         },
     },
     devtool: 'source-map',

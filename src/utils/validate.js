@@ -1,13 +1,11 @@
-function validate({ data = {}, schema = {} }) {
-    const keys = Object.keys(data);
-    if (keys === 0) return false;
-    for (let key of keys) {
-        const validationStatus = schema[key](data[key]);
-        if (!validationStatus.approved) {
-            return validationStatus;
-        }
+async function validate({ schema, data }) {
+    try {
+        const approvedValidation = await schema.validate(data);
+        return { data: approvedValidation, message: 'approved', approved: true };
+    } catch (error) {
+        const { message } = JSON.parse(JSON.stringify(error));
+        return { data: null, message, approved: false };
     }
-    return { approved: true, message: '' };
 }
 
-module.exports = validate;
+export default validate;
