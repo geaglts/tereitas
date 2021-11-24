@@ -4,3 +4,21 @@
     box-sizing: border-box;
     font-family: var(--font-primary);
 }
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1f2329;
+}
+
+::-webkit-scrollbar-thumb {
+    background: transparent;
+    border: 1px solid #59d183;
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(#59d183, 0.1);
+}
