@@ -45,6 +45,11 @@ function useInitialState() {
         const boardIndex = state.boards.findIndex((board) => board.id === boardId);
         const boards = [...state.boards];
         boards[boardIndex].tasks.push(newTask);
+        // sort tasks for incomplete first
+        boards[boardIndex].tasks = boards[boardIndex].tasks.sort((a, b) => {
+            return a.completed === b.completed ? 0 : a.completed ? 1 : -1;
+        });
+        // update the state and the local storage
         const updatedState = { ...state, boards };
         setState(updatedState);
         setStateInStorage(updatedState);
