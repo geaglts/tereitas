@@ -29,6 +29,10 @@ const Home = () => {
         setSearchedValue(event.target.value);
     };
 
+    const resetSearchedValue = () => {
+        setSearchedValue('');
+    };
+
     return (
         <>
             <Layout>
@@ -37,7 +41,7 @@ const Home = () => {
                     <p>Administra tus tareitas pendientes</p>
                 </header>
                 <div className="Actions">
-                    <SearchForm onChange={onChangeSearchedValue} />
+                    <SearchForm onChange={onChangeSearchedValue} value={searchedValue} reset={resetSearchedValue} />
                     <button className="Actions__NewBoard" onClick={handleAddBoardForm}>
                         <MdOutlinePostAdd /> Nueva tablita
                     </button>
