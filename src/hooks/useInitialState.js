@@ -62,8 +62,14 @@ function useInitialState() {
     const changeTaskStatus = ({ boardId, taskId }) => {
         const boardIndex = state.boards.findIndex((board) => board.id === boardId);
         const boards = [...state.boards];
+        // find task and change her status
         const taskIndex = boards[boardIndex].tasks.findIndex((task) => task.id === taskId);
         boards[boardIndex].tasks[taskIndex].completed = !boards[boardIndex].tasks[taskIndex].completed;
+        // sort tasks for incomplete first
+        boards[boardIndex].tasks = boards[boardIndex].tasks.sort((a, b) => {
+            return a.completed === b.completed ? 0 : a.completed ? 1 : -1;
+        });
+        // update the state and the local storage
         const updatedState = { ...state, boards };
         setState(updatedState);
         setStateInStorage(updatedState);

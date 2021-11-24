@@ -1,6 +1,9 @@
 import React, { useContext, useState } from 'react';
-import 'styles/Task.scss';
 import { BsTrash } from 'react-icons/bs';
+import 'styles/Task.scss';
+
+import capitalize from 'utils/capitalize';
+
 import AppContext from 'contexts/AppContext';
 
 import Modal from 'components/Modal';
@@ -28,7 +31,7 @@ const Task = ({ id: taskId, task, completed, boardId }) => {
         <>
             <div className={`Task${themeClass}`}>
                 <button className={`Task__Button--complete${statusClass}`} onClick={handleCompleteTask}></button>
-                <p className={`Task__Description${statusClass}`}>{task}</p>
+                <p className={`Task__Description${statusClass}`}>{capitalize(task)}</p>
                 <button className="Task__Button--delete" onClick={handleConfirmRemoveTask}>
                     <BsTrash />
                 </button>
