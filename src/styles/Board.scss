@@ -89,26 +89,37 @@
         display: grid;
         gap: 8px;
 
-        .NewTask__Button {
-            cursor: pointer;
-            justify-self: end;
-            border: none;
-            background-color: var(--color-light);
-            display: flex;
-            justify-content: center;
+        .NewTask__Header {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            column-gap: 12px;
             align-items: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 40px;
-            padding: 4px;
 
-            svg {
-                font-size: var(--font-size-md);
-                color: var(--color-dark);
+            .FormError__Container {
+                padding: 8px;
             }
 
-            &:hover {
-                outline: 2px solid var(--color-dark);
+            .NewTask__Button {
+                cursor: pointer;
+                justify-self: end;
+                border: none;
+                background-color: var(--color-light);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 40px;
+                height: 40px;
+                border-radius: 40px;
+                padding: 4px;
+
+                svg {
+                    font-size: var(--font-size-md);
+                    color: var(--color-dark);
+                }
+
+                &:hover {
+                    outline: 2px solid var(--color-dark);
+                }
             }
         }
 

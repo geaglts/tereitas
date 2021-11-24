@@ -1,4 +1,5 @@
 @use 'vars';
+@import 'animations';
 
 .FormError__Container {
     border: 2px solid var(--color-red);
@@ -8,6 +9,8 @@
     grid-template-columns: auto 1fr;
     align-items: center;
     column-gap: 12px;
+    @include show-in(300ms);
+
     .FormError__Icon {
         $size: 30px;
         width: $size;

@@ -74,10 +74,12 @@ const Board = ({ id, name = 'name', description = 'description', tasks = [] }) =
                 </div>
                 {newTaskForm && (
                     <div className="NewTask">
-                        <button className="NewTask__Button" onClick={handleNewTaskForm}>
-                            <MdClose />
-                        </button>
-                        {error.status && <FormError error={error.message} />}
+                        <div className="NewTask__Header">
+                            <div>{error.status && <FormError error={error.message} />}</div>
+                            <button className="NewTask__Button" onClick={handleNewTaskForm}>
+                                <MdClose />
+                            </button>
+                        </div>
                         <form onSubmit={onClickAddTask} className="NewTask__Form" ref={form}>
                             <input type="text" name="task" placeholder="Los que necesito hacer es..." />
                             <input type="submit" value="Agregar a la lista" />

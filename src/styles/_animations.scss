@@ -1,0 +1,20 @@
+@mixin show-in($duration) {
+    @keyframes show-in-animation {
+        0% {
+            opacity: 0;
+        }
+        25% {
+            transform: rotate(5deg);
+        }
+        50% {
+            transform: rotate(0deg);
+        }
+        75% {
+            transform: rotate(-5deg);
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    animation: show-in-animation $duration ease-in;
+}
