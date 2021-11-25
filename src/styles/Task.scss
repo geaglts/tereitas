@@ -61,13 +61,13 @@
         color: var(--color-dark);
         cursor: pointer;
 
+        &.completed {
+            text-decoration: line-through;
+        }
+
         &.inProgress {
             background-color: var(--color-orange);
             font-weight: bold;
-        }
-
-        &.completed {
-            text-decoration: line-through;
         }
     }
 
@@ -77,6 +77,11 @@
 
         .Task__Description {
             color: var(--color-light);
+
+            &.inProgress {
+                background-color: var(--color-dark);
+                color: var(--color-orange);
+            }
         }
     }
 }

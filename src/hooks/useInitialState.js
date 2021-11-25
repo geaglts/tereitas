@@ -92,6 +92,7 @@ function useInitialState() {
             boards[boardIndex].tasks[taskIndex].inProgress = !boards[boardIndex].tasks[taskIndex].inProgress;
         } else {
             boards[boardIndex].tasks[taskIndex].inProgress = true;
+            boards[boardIndex].tasks[taskIndex].completed = false;
         }
         // sort tasks for incomplete first
         boards[boardIndex].tasks = boards[boardIndex].tasks.sort((a, b) => {
