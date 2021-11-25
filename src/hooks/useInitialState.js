@@ -41,7 +41,7 @@ function useInitialState() {
     };
 
     const addTask = (boardId, { task }) => {
-        const newTask = { id: uuid(), task, completed: false };
+        const newTask = { id: uuid(), task, completed: false, inProgress: false };
         const boardIndex = state.boards.findIndex((board) => board.id === boardId);
         const boards = [...state.boards];
         boards[boardIndex].tasks.push(newTask);
@@ -70,9 +70,32 @@ function useInitialState() {
         // find task and change her status
         const taskIndex = boards[boardIndex].tasks.findIndex((task) => task.id === taskId);
         boards[boardIndex].tasks[taskIndex].completed = !boards[boardIndex].tasks[taskIndex].completed;
+        if (boards[boardIndex].tasks[taskIndex].completed) {
+            boards[boardIndex].tasks[taskIndex].inProgress = false;
+        }
         // sort tasks for incomplete first
         boards[boardIndex].tasks = boards[boardIndex].tasks.sort((a, b) => {
             return a.completed === b.completed ? 0 : a.completed ? 1 : -1;
+        });
+        // update the state and the local storage
+        const updatedState = { ...state, boards };
+        setState(updatedState);
+        setStateInStorage(updatedState);
+    };
+
+    const changeTaskProgress = ({ boardId, taskId }) => {
+        const boardIndex = state.boards.findIndex((board) => board.id === boardId);
+        const boards = [...state.boards];
+        // find task and change her status
+        const taskIndex = boards[boardIndex].tasks.findIndex((task) => task.id === taskId);
+        if (boards[boardIndex].tasks[taskIndex]?.inProgress) {
+            boards[boardIndex].tasks[taskIndex].inProgress = !boards[boardIndex].tasks[taskIndex].inProgress;
+        } else {
+            boards[boardIndex].tasks[taskIndex].inProgress = true;
+        }
+        // sort tasks for incomplete first
+        boards[boardIndex].tasks = boards[boardIndex].tasks.sort((a, b) => {
+            return a.inProgress === b.inProgress ? 0 : b.inProgress ? 1 : -1;
         });
         // update the state and the local storage
         const updatedState = { ...state, boards };
@@ -89,7 +112,17 @@ function useInitialState() {
         setStateInStorage(updatedState);
     };
 
-    return { state, handleTheme, addBoard, removeBoard, addTask, removeTask, changeTaskStatus, clearAllTasks };
+    return {
+        state,
+        handleTheme,
+        addBoard,
+        removeBoard,
+        addTask,
+        removeTask,
+        changeTaskStatus,
+        clearAllTasks,
+        changeTaskProgress,
+    };
 }
 
 export default useInitialState;

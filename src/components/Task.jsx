@@ -8,10 +8,13 @@ import AppContext from 'contexts/AppContext';
 
 import Modal from 'components/Modal';
 
-const Task = ({ id: taskId, task, completed, boardId }) => {
-    const { changeTaskStatus, removeTask, state } = useContext(AppContext);
+const Task = ({ id: taskId, task, completed, inProgress, boardId }) => {
+    console.log(inProgress);
+    const { changeTaskStatus, removeTask, state, changeTaskProgress } = useContext(AppContext);
     const [confirmRemoveTask, setConfirmRemoveTask] = useState(false);
+
     const statusClass = completed ? ' completed' : ' waiting';
+    const inProgressClass = inProgress ? ' inProgress' : '';
 
     const themeClass = state.darkTheme ? ' Dark' : '';
 
@@ -23,6 +26,10 @@ const Task = ({ id: taskId, task, completed, boardId }) => {
         changeTaskStatus({ taskId, boardId });
     };
 
+    const handleInProgressTask = () => {
+        changeTaskProgress({ taskId, boardId });
+    };
+
     const handleRemoveTask = () => {
         removeTask({ taskId, boardId });
     };
@@ -31,7 +38,9 @@ const Task = ({ id: taskId, task, completed, boardId }) => {
         <>
             <div className={`Task${themeClass}`}>
                 <button className={`Task__Button--complete${statusClass}`} onClick={handleCompleteTask}></button>
-                <p className={`Task__Description${statusClass}`}>{capitalize(task)}</p>
+                <p className={`Task__Description${statusClass} ${inProgressClass}`} onClick={handleInProgressTask}>
+                    {capitalize(task)}
+                </p>
                 <button className="Task__Button--delete" onClick={handleConfirmRemoveTask}>
                     <BsTrash />
                 </button>
