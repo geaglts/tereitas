@@ -34,11 +34,12 @@
             width: $size;
             padding: 8px;
             border-radius: 30px;
+            background-color: var(--color-light);
             transition: all 350ms ease;
             &:hover {
                 transition: all 250ms ease;
                 background-color: var(--color-dark);
-                color: var(--color-green);
+                color: var(--color-red);
             }
         }
     }
