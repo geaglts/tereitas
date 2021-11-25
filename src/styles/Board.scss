@@ -1,4 +1,5 @@
 @use 'vars';
+@import 'animations';
 
 .Board {
     display: grid;
@@ -47,12 +48,69 @@
             }
         }
 
-        p {
+        .description {
             grid-area: description;
             align-self: start;
             font-size: var(--font-size-md);
             font-weight: 400;
             color: var(--color-dark);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            column-gap: 8px;
+
+            .ClearAll {
+                border-radius: 4px;
+                z-index: 0;
+                height: 40px;
+                width: 150px;
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+                align-self: start;
+
+                &__background {
+                    z-index: 0;
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(#59d183, 0.3);
+                    transform: translate(-150px);
+                    transition: all 450ms ease;
+                }
+
+                &:hover .ClearAll__background {
+                    transition: all 350ms ease;
+                    transform: translate(0);
+                }
+
+                &__content {
+                    z-index: 1;
+                    height: 100%;
+                    width: 100%;
+                    display: flex;
+                    column-gap: 8px;
+                    color: var(--color-blue);
+                    font-size: var(--font-size-sm);
+                    justify-content: center;
+                    align-items: center;
+
+                    svg {
+                        font-size: var(--font-size-md);
+                        color: var(--color-blue);
+                    }
+
+                    &:hover svg {
+                        @include vibrate(0.8s);
+                    }
+
+                    p {
+                        font-weight: bold;
+                    }
+                }
+            }
         }
 
         .AddTask__Button {
@@ -162,8 +220,16 @@
     &.dark {
         .Board__Header {
             gap: 8px;
-            p {
+            .description {
                 color: var(--color-light);
+                .ClearAll {
+                    &__content {
+                        color: var(--color-light);
+                        svg {
+                            color: var(--color-light);
+                        }
+                    }
+                }
             }
         }
 
@@ -187,7 +253,7 @@
     }
 }
 
-.Board__Confirm--Remove {
+@mixin Board__Modal($button-width: 180px) {
     display: grid;
     row-gap: 20px;
     width: 300px;
@@ -210,7 +276,7 @@
     }
 
     .Button {
-        width: 180px;
+        width: $button-width;
         height: 40px;
         border: none;
         border-radius: 4px;
@@ -226,4 +292,12 @@
             background-color: var(--color-dark);
         }
     }
+}
+
+.Board__Confirm--Remove {
+    @include Board__Modal();
+}
+
+.CleanTask__Confirm--Remove {
+    @include Board__Modal(200px);
 }

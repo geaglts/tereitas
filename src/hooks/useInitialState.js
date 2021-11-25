@@ -80,7 +80,16 @@ function useInitialState() {
         setStateInStorage(updatedState);
     };
 
-    return { state, handleTheme, addBoard, removeBoard, addTask, removeTask, changeTaskStatus };
+    const clearAllTasks = ({ boardId }) => {
+        const boardIndex = state.boards.findIndex((board) => board.id === boardId);
+        const boards = [...state.boards];
+        boards[boardIndex].tasks = [];
+        const updatedState = { ...state, boards };
+        setState(updatedState);
+        setStateInStorage(updatedState);
+    };
+
+    return { state, handleTheme, addBoard, removeBoard, addTask, removeTask, changeTaskStatus, clearAllTasks };
 }
 
 export default useInitialState;

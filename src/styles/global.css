@@ -5,6 +5,12 @@
     font-family: var(--font-primary);
 }
 
+button {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+
 ::-webkit-scrollbar {
     width: 12px;
 }

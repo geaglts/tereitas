@@ -2,6 +2,7 @@ import React, { useState, useContext, useRef, useEffect } from 'react';
 import AppContext from 'contexts/AppContext';
 import { BsTrash, BsFillPlusCircleFill } from 'react-icons/bs';
 import { MdClose } from 'react-icons/md';
+import { BiBrushAlt } from 'react-icons/bi';
 import 'styles/Board.scss';
 
 import validate from 'utils/validate';
@@ -14,9 +15,10 @@ import Modal from 'components/Modal';
 
 const Board = ({ id, name = 'name', description = 'description', tasks = [] }) => {
     const form = useRef(null);
-    const { removeBoard, addTask, state } = useContext(AppContext);
+    const { removeBoard, addTask, state, clearAllTasks } = useContext(AppContext);
     const [newTaskForm, setNewTaskForm] = useState(false);
     const [confirmRemoveBoard, setConfirmRemoveBoard] = useState(false);
+    const [confirmCleanTasks, setConfirmCleanTasks] = useState(false);
     const { error, newError } = useError();
 
     const themeClass = state.darkTheme ? ' dark' : '';
@@ -41,6 +43,10 @@ const Board = ({ id, name = 'name', description = 'description', tasks = [] }) =
         setConfirmRemoveBoard(!confirmRemoveBoard);
     };
 
+    const handleConfirmCleanTasks = () => {
+        setConfirmCleanTasks(!confirmCleanTasks);
+    };
+
     const onClickRemoveBoard = () => {
         removeBoard({ id });
     };
@@ -58,12 +64,26 @@ const Board = ({ id, name = 'name', description = 'description', tasks = [] }) =
         }
     };
 
+    const onClickCleanTask = (boardId) => () => {
+        clearAllTasks({ boardId });
+        handleConfirmCleanTasks();
+    };
+
     return (
         <>
             <section className={`Board${themeClass}`}>
                 <div className="Board__Header">
                     <h2>{name}</h2>
-                    <p>{description}</p>
+                    <div className="description">
+                        <p>{description}</p>
+                        <button className="ClearAll" onClick={handleConfirmCleanTasks}>
+                            <div className="ClearAll__background"></div>
+                            <div className="ClearAll__content">
+                                <BiBrushAlt />
+                                <p className="ClearAll__label">Borrar todo</p>
+                            </div>
+                        </button>
+                    </div>
                     <span onClick={handleConfirmRemoveBoard} className="RemoveBoard__Button">
                         <BsTrash />
                     </span>
@@ -98,6 +118,15 @@ const Board = ({ id, name = 'name', description = 'description', tasks = [] }) =
                     <p className="Label">Esta acción eliminará la tabla completa con todas sus tareas</p>
                     <button className="Button" onClick={onClickRemoveBoard}>
                         Entiendo, elimínala
+                    </button>
+                </div>
+            </Modal>
+            <Modal isActive={confirmCleanTasks} changeStatus={handleConfirmCleanTasks}>
+                <div className="CleanTask__Confirm--Remove">
+                    <BsTrash className="Icon" />
+                    <p className="Label">Esta acción eliminará todas las tareas de la tablita</p>
+                    <button className="Button" onClick={onClickCleanTask(id)}>
+                        Entiendo, elimina todo
                     </button>
                 </div>
             </Modal>

@@ -18,3 +18,20 @@
     }
     animation: show-in-animation $duration ease-in;
 }
+
+@mixin vibrate($duration) {
+    @keyframes vibrate-animation {
+        0%,
+        50%,
+        100% {
+            transform: rotate(0deg);
+        }
+        25% {
+            transform: rotate(-40deg);
+        }
+        75% {
+            transform: rotate(40deg);
+        }
+    }
+    animation: vibrate-animation $duration infinite linear;
+}
