@@ -9,7 +9,6 @@ import AppContext from 'contexts/AppContext';
 import Modal from 'components/Modal';
 
 const Task = ({ id: taskId, task, completed, inProgress, boardId }) => {
-    console.log(inProgress);
     const { changeTaskStatus, removeTask, state, changeTaskProgress } = useContext(AppContext);
     const [confirmRemoveTask, setConfirmRemoveTask] = useState(false);
 
