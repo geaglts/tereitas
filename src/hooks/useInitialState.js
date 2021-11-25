@@ -96,7 +96,13 @@ function useInitialState() {
         }
         // sort tasks for incomplete first
         boards[boardIndex].tasks = boards[boardIndex].tasks.sort((a, b) => {
-            return a.inProgress === b.inProgress ? 0 : b.inProgress ? 1 : -1;
+            if (a.inProgress === b.inProgress && a.completed === b.completed) {
+                return 0;
+            } else if (b.inProgress || a.completed) {
+                return 1;
+            } else {
+                return -1;
+            }
         });
         // update the state and the local storage
         const updatedState = { ...state, boards };
