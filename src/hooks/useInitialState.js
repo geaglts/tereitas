@@ -110,6 +110,18 @@ function useInitialState() {
         setStateInStorage(updatedState);
     };
 
+    const updateTask = ({ boardId, taskId, task }) => {
+        const boardIndex = state.boards.findIndex((board) => board.id === boardId);
+        const boards = [...state.boards];
+        // find task and change the description
+        const taskIndex = boards[boardIndex].tasks.findIndex((task) => task.id === taskId);
+        boards[boardIndex].tasks[taskIndex].task = task;
+        // update the state and the local storage
+        const updatedState = { ...state, boards };
+        setState(updatedState);
+        setStateInStorage(updatedState);
+    };
+
     const clearAllTasks = ({ boardId }) => {
         const boardIndex = state.boards.findIndex((board) => board.id === boardId);
         const boards = [...state.boards];
@@ -129,6 +141,7 @@ function useInitialState() {
         changeTaskStatus,
         clearAllTasks,
         changeTaskProgress,
+        updateTask,
     };
 }
 
