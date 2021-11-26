@@ -40,11 +40,12 @@
             border: none;
             background-color: transparent;
             font-size: var(--font-size-md);
-            color: var(--color-light);
+            color: var(--color-dark);
             padding: 8px 12px;
+            font-weight: bold;
 
             &:focus {
-                outline: 2px solid var(--color-light);
+                outline: 2px solid var(--color-dark);
                 border-radius: 4px;
             }
 
@@ -155,6 +156,16 @@
     &.Dark {
         background-color: var(--color-dark);
         box-shadow: 0 2px 8px 1px rgba(white, 0.07);
+
+        .UpdateTaskForm {
+            .UpdateTaskForm__input {
+                color: var(--color-light);
+
+                &:focus {
+                    outline-color: var(--color-light);
+                }
+            }
+        }
 
         .Task__Description {
             color: var(--color-light);
