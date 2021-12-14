@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import MarkdownIt from 'markdown-it';
 import MarkdownItCheckbox from 'markdown-it-checkbox';
-import MarkdownItTable from 'markdown-it-multimd-table';
 import { BsTrash } from 'react-icons/bs';
 import { MdUpdate } from 'react-icons/md';
 import 'styles/Task.scss';
@@ -16,7 +15,7 @@ import validate from 'utils/validate';
 import { createTaskSchema } from 'schemas/task.schema';
 
 const Task = ({ id: taskId, task, completed, inProgress, boardId }) => {
-    const markdown = new MarkdownIt({ html: true }).use(MarkdownItCheckbox).use(MarkdownItTable);
+    const markdown = new MarkdownIt({ html: true }).use(MarkdownItCheckbox);
     const { changeTaskStatus, removeTask, state, changeTaskProgress, updateTask } = useContext(AppContext);
     const [confirmRemoveTask, setConfirmRemoveTask] = useState(false);
     const [taskValue, setTaskValue] = useState(task);
