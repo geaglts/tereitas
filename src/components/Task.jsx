@@ -82,7 +82,7 @@ const Task = ({ id: taskId, task, completed, inProgress, boardId }) => {
                                 value={taskValue}
                                 onChange={onChangeTaskValue}
                                 cols="1"
-                                rows="3"
+                                rows="12"
                             ></textarea>
                             <button className="UpdateTaskForm__button--update" type="submit">
                                 Cambiar tarea
