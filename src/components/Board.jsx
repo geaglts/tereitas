@@ -5,6 +5,7 @@ import { MdClose } from 'react-icons/md';
 import { BiBrushAlt } from 'react-icons/bi';
 import 'styles/Board.scss';
 
+import capitalize from 'utils/capitalize';
 import validate from 'utils/validate';
 import { createTaskSchema } from 'schemas/task.schema.js';
 import useError from 'hooks/useError';
@@ -75,7 +76,7 @@ const Board = ({ id, name = 'name', description = 'description', tasks = [] }) =
                 <div className="Board__Header">
                     <h2>{name}</h2>
                     <div className="description">
-                        <p>{description}</p>
+                        <p>{capitalize(description)}</p>
                         <button className="ClearAll" onClick={handleConfirmCleanTasks}>
                             <div className="ClearAll__background"></div>
                             <div className="ClearAll__content">
