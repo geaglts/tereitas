@@ -27,7 +27,7 @@ module.exports = {
         },
     },
     devtool: 'source-map',
-    devServer: { port: 3000, historyApiFallback: true, open: true },
+    devServer: { port: 3000, historyApiFallback: true, open: false, allowedHosts: ['localhost', 'wsl'] },
     module: {
         rules: [
             { test: /\jsx?$/, exclude: /node_modules/, use: ['babel-loader'] },

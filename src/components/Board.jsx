@@ -101,7 +101,12 @@ const Board = ({ id, name = 'name', description = 'description', tasks = [] }) =
                             </button>
                         </div>
                         <form onSubmit={onClickAddTask} className="NewTask__Form" ref={form}>
-                            <input type="text" name="task" placeholder="Los que necesito hacer es..." />
+                            <textarea
+                                name="task"
+                                placeholder="Los que necesito hacer es..."
+                                cols="1"
+                                rows="2"
+                            ></textarea>
                             <input type="submit" value="Agregar a la lista" />
                         </form>
                     </div>
