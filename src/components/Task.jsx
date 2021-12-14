@@ -1,9 +1,9 @@
-import React, { useContext, useState, useRef, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
+import MarkdownIt from 'markdown-it';
+import MarkdownItCheckbox from 'markdown-it-checkbox';
 import { BsTrash } from 'react-icons/bs';
 import { MdUpdate } from 'react-icons/md';
 import 'styles/Task.scss';
-
-import capitalize from 'utils/capitalize';
 
 import FormError from 'components/FormError';
 import Modal from 'components/Modal';
@@ -15,6 +15,7 @@ import validate from 'utils/validate';
 import { createTaskSchema } from 'schemas/task.schema';
 
 const Task = ({ id: taskId, task, completed, inProgress, boardId }) => {
+    const markdown = new MarkdownIt({ html: true }).use(MarkdownItCheckbox);
     const { changeTaskStatus, removeTask, state, changeTaskProgress, updateTask } = useContext(AppContext);
     const [confirmRemoveTask, setConfirmRemoveTask] = useState(false);
     const [taskValue, setTaskValue] = useState(task);
@@ -25,6 +26,12 @@ const Task = ({ id: taskId, task, completed, inProgress, boardId }) => {
     const inProgressClass = inProgress ? ' inProgress' : '';
 
     const themeClass = state.darkTheme ? ' Dark' : '';
+
+    const parseHtml = (str) => {
+        const parsedHTML = markdown.render(str);
+        parseHtml.toString().replace(/code/gm);
+        return parsedHTML;
+    };
 
     const handleConfirmRemoveTask = () => {
         setConfirmRemoveTask(!confirmRemoveTask);
@@ -68,14 +75,15 @@ const Task = ({ id: taskId, task, completed, inProgress, boardId }) => {
                     <>
                         <form onSubmit={onSubmit} className="UpdateTaskForm">
                             {error.status && <FormError error={error.message} />}
-                            <input
+                            <textarea
                                 className="UpdateTaskForm__input"
-                                type="text"
                                 name="task"
                                 placeholder="La tarea ahora es..."
                                 value={taskValue}
                                 onChange={onChangeTaskValue}
-                            />
+                                cols="1"
+                                rows="3"
+                            ></textarea>
                             <button className="UpdateTaskForm__button--update" type="submit">
                                 Cambiar tarea
                             </button>
@@ -87,12 +95,11 @@ const Task = ({ id: taskId, task, completed, inProgress, boardId }) => {
                 ) : (
                     <>
                         <button className={`Task__Button--complete${statusClass}`} onClick={handleCompleteTask} />
-                        <p
+                        <div
+                            dangerouslySetInnerHTML={{ __html: parseHtml(task) }}
                             className={`Task__Description${statusClass} ${inProgressClass}`}
                             onClick={handleInProgressTask}
-                        >
-                            {capitalize(task)}
-                        </p>
+                        ></div>
                         <button className="Task__Button--update" onClick={handleUpdateTask}>
                             <MdUpdate />
                         </button>
