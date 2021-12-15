@@ -29,8 +29,8 @@ const Task = ({ id: taskId, task, completed, inProgress, boardId }) => {
 
     const parseHtml = (str) => {
         const parsedHTML = markdown.render(str);
-        parseHtml.toString().replace(/code/gm);
-        return parsedHTML;
+        const htmlWithTarget = parsedHTML.toString().replace(/<a/gm, '<a target="__blank"');
+        return htmlWithTarget;
     };
 
     const handleConfirmRemoveTask = () => {
