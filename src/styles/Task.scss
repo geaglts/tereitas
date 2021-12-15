@@ -188,6 +188,24 @@
             }
         }
 
+        a {
+            $color: var(--color-dark);
+            color: $color;
+            border-bottom: 1px solid $color;
+            font-size: var(--font-size-sm);
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 4px;
+            transition: all 450ms ease;
+
+            &:hover {
+                $color: var(--color-blue);
+                color: $color;
+                border-color: $color;
+                transition: all 350ms ease;
+            }
+        }
+
         p code,
         li code {
             background-color: #393e41;
@@ -284,6 +302,18 @@
             &.inProgress {
                 background-color: var(--color-orange);
                 color: var(--color-dark);
+            }
+
+            a {
+                $color: var(--color-green);
+                color: $color;
+                border-bottom: 1px solid $color;
+
+                &:hover {
+                    $color: var(--color-blue);
+                    color: $color;
+                    border-bottom: 1px solid $color;
+                }
             }
         }
 
