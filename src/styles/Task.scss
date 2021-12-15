@@ -241,8 +241,49 @@
         pre {
             background-color: #393e41;
             border-radius: 4px;
+            overflow: hidden;
             padding: 20px;
             margin: 8px 0;
+            position: relative;
+
+            div.CopyCodeToClipboard {
+                position: absolute;
+                font-family: var(--font-code);
+                right: 0;
+                top: 0;
+                transition: all 450ms ease;
+                font-size: var(--font-size-ssm);
+
+                button {
+                    border-bottom-left-radius: 8px;
+                    padding: 8px;
+                    background-color: rgba(white, 0.1);
+                    color: var(--color-green);
+                    cursor: pointer;
+
+                    &:hover {
+                        transition: all 350ms ease;
+                        background-color: rgba(white, 0.2);
+                    }
+                }
+
+                span {
+                    &.hiden {
+                        display: none;
+                    }
+
+                    &.showed {
+                        color: var(--color-green);
+                        position: absolute;
+                        left: -75px;
+                        top: 20px;
+                        background-color: rgba(white, 0.2);
+                        padding: 4px 8px;
+                        border-radius: 4px;
+                        border-radius: 8px 0 8px 8px;
+                    }
+                }
+            }
 
             code {
                 font-weight: 300;

@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
-import MarkdownIt from 'markdown-it';
-import MarkdownItCheckbox from 'markdown-it-checkbox';
+import * as clipboard from 'clipboard-polyfill';
 import { BsTrash } from 'react-icons/bs';
 import { MdUpdate, MdTimer, MdTimerOff } from 'react-icons/md';
 import 'styles/Task.scss';
@@ -10,12 +9,12 @@ import Modal from 'components/Modal';
 
 import AppContext from 'contexts/AppContext';
 
-import useError from 'hooks/useError';
+import parseHtml from 'utils/parseHtml';
 import validate from 'utils/validate';
+import useError from 'hooks/useError';
 import { createTaskSchema } from 'schemas/task.schema';
 
 const Task = ({ id: taskId, task, completed, inProgress, boardId }) => {
-    const markdown = new MarkdownIt({ html: true }).use(MarkdownItCheckbox);
     const { changeTaskStatus, removeTask, state, changeTaskProgress, updateTask } = useContext(AppContext);
     const [confirmRemoveTask, setConfirmRemoveTask] = useState(false);
     const [taskValue, setTaskValue] = useState(task);
@@ -26,12 +25,6 @@ const Task = ({ id: taskId, task, completed, inProgress, boardId }) => {
     const inProgressClass = inProgress ? ' inProgress' : '';
 
     const themeClass = state.darkTheme ? ' Dark' : '';
-
-    const parseHtml = (str) => {
-        const parsedHTML = markdown.render(str);
-        const htmlWithTarget = parsedHTML.toString().replace(/<a/gm, '<a target="__blank"');
-        return htmlWithTarget;
-    };
 
     const handleConfirmRemoveTask = () => {
         setConfirmRemoveTask(!confirmRemoveTask);
@@ -51,6 +44,18 @@ const Task = ({ id: taskId, task, completed, inProgress, boardId }) => {
 
     const handleRemoveTask = () => {
         removeTask({ taskId, boardId });
+    };
+
+    const handleCopyCode = async (e) => {
+        if (e.target.classList[0] === 'CopyButton') {
+            await clipboard.writeText(e.nativeEvent.path[1].children[1].textContent);
+            e.nativeEvent.path[1].children[1].classList.remove('hiden');
+            e.nativeEvent.path[1].children[1].classList.add('showed');
+            setTimeout(() => {
+                e.nativeEvent.path[1].children[1].classList.remove('showed');
+                e.nativeEvent.path[1].children[1].classList.add('hiden');
+            }, 2000);
+        }
     };
 
     const onChangeTaskValue = (event) => {
@@ -98,6 +103,7 @@ const Task = ({ id: taskId, task, completed, inProgress, boardId }) => {
                         <div
                             dangerouslySetInnerHTML={{ __html: parseHtml(task) }}
                             className={`Task__Description${statusClass} ${inProgressClass}`}
+                            onClick={handleCopyCode}
                         />
                         <button className="Task__Button--update" onClick={handleUpdateTask}>
                             <MdUpdate />
