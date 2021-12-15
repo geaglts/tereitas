@@ -32,28 +32,9 @@
         row-gap: 16px;
         column-gap: 12px;
 
-        .FormError__Container {
-            grid-column: 1 / 3;
-        }
-
+        .FormError__Container,
         .UpdateTaskForm__input {
-            resize: vertical;
-            grid-area: input;
-            border: none;
-            background-color: transparent;
-            font-size: var(--font-size-md);
-            color: var(--color-dark);
-            padding: 8px 12px;
-            font-weight: bold;
-
-            &:focus {
-                outline: 2px solid var(--color-dark);
-                border-radius: 4px;
-            }
-
-            &::placeholder {
-                color: var(--color-light);
-            }
+            grid-column: 1 / 3;
         }
 
         .UpdateTaskForm__button {

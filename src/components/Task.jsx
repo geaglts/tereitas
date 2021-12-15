@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import * as clipboard from 'clipboard-polyfill';
+import Editor from '@monaco-editor/react';
 import { BsTrash } from 'react-icons/bs';
 import { MdUpdate, MdTimer, MdTimerOff } from 'react-icons/md';
 import 'styles/Task.scss';
@@ -58,8 +59,8 @@ const Task = ({ id: taskId, task, completed, inProgress, boardId }) => {
         }
     };
 
-    const onChangeTaskValue = (event) => {
-        setTaskValue(event.target.value);
+    const onChangeTaskValue = (e) => {
+        setTaskValue(e);
     };
 
     const onSubmit = async (event) => {
@@ -80,15 +81,16 @@ const Task = ({ id: taskId, task, completed, inProgress, boardId }) => {
                     <>
                         <form onSubmit={onSubmit} className="UpdateTaskForm">
                             {error.status && <FormError error={error.message} />}
-                            <textarea
-                                className="UpdateTaskForm__input"
-                                name="task"
-                                placeholder="La tarea ahora es..."
-                                value={taskValue}
-                                onChange={onChangeTaskValue}
-                                cols="1"
-                                rows="12"
-                            ></textarea>
+                            <div className="UpdateTaskForm__input">
+                                <Editor
+                                    style={{ gridColumn: 1 / 3 }}
+                                    height="350px"
+                                    theme="vs-dark"
+                                    defaultLanguage="markdown"
+                                    value={taskValue}
+                                    onChange={onChangeTaskValue}
+                                />
+                            </div>
                             <button className="UpdateTaskForm__button--update" type="submit">
                                 Cambiar tarea
                             </button>
