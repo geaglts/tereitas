@@ -1,5 +1,6 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import AppContext from 'contexts/AppContext';
+import Editor from '@monaco-editor/react';
 import { BsTrash, BsFillPlusCircleFill } from 'react-icons/bs';
 import { MdClose } from 'react-icons/md';
 import { BiBrushAlt } from 'react-icons/bi';
@@ -8,16 +9,17 @@ import 'styles/Board.scss';
 import capitalize from 'utils/capitalize';
 import validate from 'utils/validate';
 import { createTaskSchema } from 'schemas/task.schema.js';
-import useError from 'hooks/useError';
-import FormError from 'components/FormError';
 
+import useError from 'hooks/useError';
+
+import FormError from 'components/FormError';
 import Task from 'components/Task';
 import Modal from 'components/Modal';
 
 const Board = ({ id, name = 'name', description = 'description', tasks = [] }) => {
-    const form = useRef(null);
     const { removeBoard, addTask, state, clearAllTasks } = useContext(AppContext);
     const [newTaskForm, setNewTaskForm] = useState(false);
+    const [newTaskText, setnewTaskText] = useState('# Nueva tarea');
     const [confirmRemoveBoard, setConfirmRemoveBoard] = useState(false);
     const [confirmCleanTasks, setConfirmCleanTasks] = useState(false);
     const { error, newError } = useError();
@@ -54,12 +56,11 @@ const Board = ({ id, name = 'name', description = 'description', tasks = [] }) =
 
     const onClickAddTask = async (event) => {
         event.preventDefault();
-        const formData = new FormData(form.current);
-        const data = { task: formData.get('task') };
+        const data = { task: newTaskText };
         const validatedData = await validate({ schema: createTaskSchema, data });
         if (validatedData.approved) {
             addTask(id, data);
-            form.current.reset();
+            setnewTaskText('# Nueva tarea');
         } else {
             newError(validatedData.message);
         }
@@ -101,13 +102,14 @@ const Board = ({ id, name = 'name', description = 'description', tasks = [] }) =
                                 <MdClose />
                             </button>
                         </div>
-                        <form onSubmit={onClickAddTask} className="NewTask__Form" ref={form}>
-                            <textarea
-                                name="task"
-                                placeholder="Los que necesito hacer es..."
-                                cols="1"
-                                rows="2"
-                            ></textarea>
+                        <form onSubmit={onClickAddTask} className="NewTask__Form">
+                            <Editor
+                                height="350px"
+                                theme="vs-dark"
+                                defaultLanguage="markdown"
+                                value={newTaskText}
+                                onChange={(e) => setnewTaskText(e)}
+                            />
                             <input type="submit" value="Agregar a la lista" />
                         </form>
                     </div>
