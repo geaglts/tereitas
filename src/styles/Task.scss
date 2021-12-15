@@ -84,76 +84,6 @@
         }
     }
 
-    .Task__Description {
-        // All styles for markdown render
-        @for $i from 1 through 4 {
-            h#{$i} {
-                line-height: 1.5;
-                font-size: 28px - (3px * $i);
-                border-bottom: 1px solid rgba(gray, 0.5);
-                padding-bottom: 4px;
-            }
-        }
-
-        p {
-            line-height: 1.5;
-            font-size: 12pt;
-            padding-top: 4px;
-        }
-
-        input[type='checkbox'] {
-            margin-right: 4px;
-        }
-
-        ul {
-            margin-top: 8px;
-            padding-left: 22px;
-            list-style-type: square;
-        }
-
-        pre {
-            background-color: #393e41;
-            border-radius: 4px;
-            padding: 20px;
-            margin: 8px 0;
-
-            code {
-                font-weight: 300;
-                font-family: var(--font-code);
-                font-size: 14px;
-                color: white;
-            }
-        }
-
-        table {
-            margin-top: 8px;
-            border-collapse: collapse;
-            border-radius: 4px;
-            overflow: hidden;
-
-            th,
-            td {
-                padding: 8px;
-                border: 1px solid rgba(gray, 0.1);
-                font-family: var(--font-code);
-            }
-
-            tr {
-                &:nth-child(even) {
-                    background-color: rgba(gray, 0.1);
-                }
-            }
-
-            th {
-                font-size: var(--font-size-sm);
-            }
-
-            td {
-                font-size: var(--font-size-ssm);
-            }
-        }
-    }
-
     &__Button {
         &--complete {
             height: 100%;
@@ -225,6 +155,90 @@
         &.inProgress {
             background-color: var(--color-orange);
             font-weight: bold;
+        }
+
+        // All styles for markdown render
+        @for $i from 1 through 4 {
+            h#{$i} {
+                line-height: 1.5;
+                font-size: 28px - (3px * $i);
+                border-bottom: 1px solid rgba(gray, 0.5);
+                padding-bottom: 4px;
+            }
+        }
+
+        p code,
+        li code {
+            background-color: #393e41;
+            padding: 4px;
+            border-radius: 4px;
+            font-family: var(--font-code);
+            font-size: 10pt;
+            color: var(--color-orange);
+        }
+
+        p {
+            line-height: 1.5;
+            font-size: var(--font-size-sm);
+            padding-top: 4px;
+            margin-top: 2px;
+        }
+
+        input[type='checkbox'] {
+            margin-right: 4px;
+        }
+
+        ul {
+            margin-top: 8px;
+            padding-left: 22px;
+            list-style-type: square;
+
+            li {
+                font-size: var(--font-size-sm);
+                margin-bottom: 5px;
+            }
+        }
+
+        pre {
+            background-color: #393e41;
+            border-radius: 4px;
+            padding: 20px;
+            margin: 8px 0;
+
+            code {
+                font-weight: 300;
+                font-family: var(--font-code);
+                font-size: 14px;
+                color: white;
+            }
+        }
+
+        table {
+            margin-top: 8px;
+            border-collapse: collapse;
+            border-radius: 4px;
+            overflow: hidden;
+
+            th,
+            td {
+                padding: 8px;
+                border: 1px solid rgba(gray, 0.1);
+                font-family: var(--font-code);
+            }
+
+            tr {
+                &:nth-child(even) {
+                    background-color: rgba(gray, 0.1);
+                }
+            }
+
+            th {
+                font-size: var(--font-size-sm);
+            }
+
+            td {
+                font-size: var(--font-size-ssm);
+            }
         }
     }
 
