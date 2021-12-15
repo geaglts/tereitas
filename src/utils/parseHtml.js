@@ -32,7 +32,10 @@ const parseHtml = (str) => {
     const markdown = new MarkdownIt({ html: true }).use(markdownItCheckbox);
     const parsedHTML = markdown.render(str);
     const htmlWithTarget = parsedHTML.toString().replace(/<a/gm, '<a target="__blank"');
-    const htmlWithCopyButton = addCopyToClipboard(htmlWithTarget).outerHTML;
+    const htmlWithCheckboxDisabled = htmlWithTarget
+        .toString()
+        .replace(/<input type="checkbox"/gm, '<input type="checkbox" disabled');
+    const htmlWithCopyButton = addCopyToClipboard(htmlWithCheckboxDisabled).outerHTML;
     return htmlWithCopyButton;
 };
 
