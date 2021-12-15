@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import MarkdownIt from 'markdown-it';
 import MarkdownItCheckbox from 'markdown-it-checkbox';
 import { BsTrash } from 'react-icons/bs';
-import { MdUpdate } from 'react-icons/md';
+import { MdUpdate, MdTimer, MdTimerOff } from 'react-icons/md';
 import 'styles/Task.scss';
 
 import FormError from 'components/FormError';
@@ -98,13 +98,15 @@ const Task = ({ id: taskId, task, completed, inProgress, boardId }) => {
                         <div
                             dangerouslySetInnerHTML={{ __html: parseHtml(task) }}
                             className={`Task__Description${statusClass} ${inProgressClass}`}
-                            onClick={handleInProgressTask}
-                        ></div>
+                        />
                         <button className="Task__Button--update" onClick={handleUpdateTask}>
                             <MdUpdate />
                         </button>
                         <button className="Task__Button--delete" onClick={handleConfirmRemoveTask}>
                             <BsTrash />
+                        </button>
+                        <button className="Task__Button--start" onClick={handleInProgressTask}>
+                            {inProgress ? <MdTimer /> : <MdTimerOff />}
                         </button>
                     </>
                 )}
