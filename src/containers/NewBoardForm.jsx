@@ -1,14 +1,14 @@
 import React, { useRef, useContext } from 'react';
-import 'styles/NewBoardForm.scss';
+import '@styles/NewBoardForm.scss';
 
-import validate from 'utils/validate';
-import { createBoardSchema } from 'schemas/board.schema';
+import validate from '@utils/validate';
+import { createBoardSchema } from '@schemas/board.schema';
 
-import AppContext from 'contexts/AppContext';
+import AppContext from '@contexts/AppContext';
 
-import FormError from 'components/FormError';
+import FormError from '@components/FormError';
 
-import useError from 'hooks/useError';
+import useError from '@hooks/useError';
 
 const NewBoardForm = () => {
     const form = useRef(null);

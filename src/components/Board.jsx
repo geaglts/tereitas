@@ -1,20 +1,22 @@
-import React, { useState, useContext, useRef, useEffect } from 'react';
-import AppContext from 'contexts/AppContext';
+import React, { useState, useContext, useEffect } from 'react';
 import Editor from '@monaco-editor/react';
 import { BsTrash, BsFillPlusCircleFill } from 'react-icons/bs';
 import { MdClose } from 'react-icons/md';
 import { BiBrushAlt } from 'react-icons/bi';
-import 'styles/Board.scss';
 
-import capitalize from 'utils/capitalize';
-import validate from 'utils/validate';
-import { createTaskSchema } from 'schemas/task.schema.js';
+import AppContext from '@contexts/AppContext';
 
-import useError from 'hooks/useError';
+import capitalize from '@utils/capitalize';
+import validate from '@utils/validate';
+import { createTaskSchema } from '@schemas/task.schema.js';
 
-import FormError from 'components/FormError';
-import Task from 'components/Task';
-import Modal from 'components/Modal';
+import useError from '@hooks/useError';
+
+import FormError from '@components/FormError';
+import Task from '@components/Task';
+import Modal from '@components/Modal';
+
+import '@styles/Board.scss';
 
 const Board = ({ id, name = 'name', description = 'description', tasks = [] }) => {
     const { removeBoard, addTask, state, clearAllTasks } = useContext(AppContext);

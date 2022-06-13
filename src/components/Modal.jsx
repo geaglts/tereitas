@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { createPortal } from 'react-dom';
 import { MdClose } from 'react-icons/md';
-import AppContext from 'contexts/AppContext';
-import 'styles/Modal.scss';
+import AppContext from '@contexts/AppContext';
+import '@styles/Modal.scss';
 
 const Modal = ({ children, isActive, changeStatus }) => {
     const { state } = useContext(AppContext);

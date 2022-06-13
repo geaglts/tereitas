@@ -1,9 +1,9 @@
 import React, { useRef, useContext } from 'react';
-import 'styles/SearchForm.scss';
 import { BiSearchAlt } from 'react-icons/bi';
 import { AiOutlineClose } from 'react-icons/ai';
 
-import AppContext from 'contexts/AppContext';
+import AppContext from '@contexts/AppContext';
+import '@styles/SearchForm.scss';
 
 const SearchForm = ({ onSearch = () => {}, onChange = () => {}, value = '', reset = () => {} }) => {
     const { state } = useContext(AppContext);

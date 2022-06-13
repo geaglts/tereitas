@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import uuid from 'utils/uuid';
+import uuid from '@utils/uuid';
 
 const initialState = {
     darkTheme: false,

@@ -1,15 +1,15 @@
 import React, { useContext, useState } from 'react';
 import { MdOutlinePostAdd } from 'react-icons/md';
-import 'styles/Home.scss';
+import '@styles/Home.scss';
 
-import Layout from 'containers/Layout';
-import NewBoardForm from 'containers/NewBoardForm';
+import Layout from '@containers/Layout';
+import NewBoardForm from '@containers/NewBoardForm';
 
-import Modal from 'components/Modal';
-import Board from 'components/Board';
-import SearchForm from 'components/SearchForm';
+import Modal from '@components/Modal';
+import Board from '@components/Board';
+import SearchForm from '@components/SearchForm';
 
-import AppContext from 'contexts/AppContext';
+import AppContext from '@contexts/AppContext';
 
 const filterBoardsByName = (searchedValue) => (boards) => {
     const nameIncludeSearchedValue = boards.name.toLowerCase().includes(searchedValue.toLowerCase());

@@ -1,6 +1,6 @@
 import React from 'react';
 import { BiErrorCircle } from 'react-icons/bi';
-import 'styles/FormError.scss';
+import '@styles/FormError.scss';
 
 const FormError = ({ error = '' }) => {
     return (

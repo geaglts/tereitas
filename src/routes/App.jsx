@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Home from 'pages/Home';
+import Home from '@pages/Home';
 
-import AppContext from 'contexts/AppContext';
-import useInitialState from 'hooks/useInitialState';
+import AppContext from '@contexts/AppContext';
+import useInitialState from '@hooks/useInitialState';
 
 const App = () => {
     const initialState = useInitialState();

@@ -3,17 +3,17 @@ import * as clipboard from 'clipboard-polyfill';
 import Editor from '@monaco-editor/react';
 import { BsTrash } from 'react-icons/bs';
 import { MdUpdate, MdTimer, MdTimerOff } from 'react-icons/md';
-import 'styles/Task.scss';
+import '@styles/Task.scss';
 
-import FormError from 'components/FormError';
-import Modal from 'components/Modal';
+import FormError from '@components/FormError';
+import Modal from '@components/Modal';
 
-import AppContext from 'contexts/AppContext';
+import AppContext from '@contexts/AppContext';
 
-import parseHtml from 'utils/parseHtml';
-import validate from 'utils/validate';
-import useError from 'hooks/useError';
-import { createTaskSchema } from 'schemas/task.schema';
+import parseHtml from '@utils/parseHtml';
+import validate from '@utils/validate';
+import useError from '@hooks/useError';
+import { createTaskSchema } from '@schemas/task.schema';
 
 const Task = ({ id: taskId, task, completed, inProgress, boardId }) => {
     const { changeTaskStatus, removeTask, state, changeTaskProgress, updateTask } = useContext(AppContext);
