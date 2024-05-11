@@ -29,7 +29,7 @@ const SearchForm = ({ onSearch = () => {}, onChange = () => {}, value = '', rese
             />
             {value.length > 0 && <AiOutlineClose className="ResetSearchedValue" onClick={reset} />}
             <button type="submit">
-                <BiSearchAlt />
+                <BiSearchAlt /> Buscar
             </button>
         </form>
     );

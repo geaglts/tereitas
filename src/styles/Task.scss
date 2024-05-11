@@ -322,7 +322,7 @@
             color: var(--color-light);
 
             &.inProgress {
-                background-color: var(--color-orange);
+                background-color: var(--color-light);
                 color: var(--color-dark);
             }
 
@@ -336,6 +336,10 @@
                     color: $color;
                     border-bottom: 1px solid $color;
                 }
+            }
+
+            ul {
+                list-style: none;
             }
         }
 

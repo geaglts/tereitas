@@ -1,4 +1,4 @@
-@use 'vars';
+@use 'vars' as *;
 
 .Layout {
     min-height: 100vh;
@@ -34,7 +34,7 @@
 
 .Layout.dark {
     background-color: var(--color-dark);
-    color: var(--color-green);
+    color: $color-cream;
 
     .Layout__ChangeTheme {
         svg {

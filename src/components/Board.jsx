@@ -15,6 +15,7 @@ import useError from '@hooks/useError';
 import FormError from '@components/FormError';
 import Task from '@components/Task';
 import Modal from '@components/Modal';
+import { Button } from './Button';
 
 import '@styles/Board.scss';
 
@@ -87,14 +88,15 @@ const Board = ({ id, name = 'name', description = 'description', tasks = [] }) =
                                 <p className="ClearAll__label">Borrar todo</p>
                             </div>
                         </button>
+                        <div className="NewTaskContainer">
+                            <Button onClick={handleNewTaskForm}>
+                                <BsFillPlusCircleFill />
+                            </Button>
+                        </div>
                     </div>
                     <span onClick={handleConfirmRemoveBoard} className="RemoveBoard__Button">
                         <BsTrash />
                     </span>
-                    <button onClick={handleNewTaskForm} className="AddTask__Button">
-                        <BsFillPlusCircleFill />
-                        <span className="RemoveBoard__Button--Title">Nueva tarea</span>
-                    </button>
                 </div>
                 {newTaskForm && (
                     <div className="NewTask">
@@ -105,6 +107,7 @@ const Board = ({ id, name = 'name', description = 'description', tasks = [] }) =
                             </button>
                         </div>
                         <form onSubmit={onClickAddTask} className="NewTask__Form">
+                            <Button type="submit">Agregar a la lista</Button>
                             <Editor
                                 height="350px"
                                 theme="vs-dark"
@@ -112,7 +115,6 @@ const Board = ({ id, name = 'name', description = 'description', tasks = [] }) =
                                 value={newTaskText}
                                 onChange={(e) => setnewTaskText(e)}
                             />
-                            <input type="submit" value="Agregar a la lista" />
                         </form>
                     </div>
                 )}

@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import * as clipboard from 'clipboard-polyfill';
 import Editor from '@monaco-editor/react';
 import { BsTrash } from 'react-icons/bs';
 import { MdUpdate, MdTimer, MdTimerOff } from 'react-icons/md';
@@ -49,13 +48,17 @@ const Task = ({ id: taskId, task, completed, inProgress, boardId }) => {
 
     const handleCopyCode = async (e) => {
         if (e.target.classList[0] === 'CopyButton') {
-            await clipboard.writeText(e.nativeEvent.path[1].children[1].textContent);
-            e.nativeEvent.path[1].children[1].classList.remove('hiden');
-            e.nativeEvent.path[1].children[1].classList.add('showed');
-            setTimeout(() => {
-                e.nativeEvent.path[1].children[1].classList.remove('showed');
-                e.nativeEvent.path[1].children[1].classList.add('hiden');
-            }, 2000);
+            try {
+                await navigator.clipboard.writeText(e.nativeEvent.path[1].children[1].textContent);
+                e.nativeEvent.path[1].children[1].classList.remove('hiden');
+                e.nativeEvent.path[1].children[1].classList.add('showed');
+                setTimeout(() => {
+                    e.nativeEvent.path[1].children[1].classList.remove('showed');
+                    e.nativeEvent.path[1].children[1].classList.add('hiden');
+                }, 2000);
+            } catch (error) {
+                alert('No se pudo copiar el código');
+            }
         }
     };
 

@@ -8,6 +8,7 @@ import NewBoardForm from '@containers/NewBoardForm';
 import Modal from '@components/Modal';
 import Board from '@components/Board';
 import SearchForm from '@components/SearchForm';
+import { Button } from '@components/Button';
 
 import AppContext from '@contexts/AppContext';
 
@@ -42,9 +43,11 @@ const Home = () => {
                 </header>
                 <div className="Actions">
                     <SearchForm onChange={onChangeSearchedValue} value={searchedValue} reset={resetSearchedValue} />
-                    <button className="Actions__NewBoard" onClick={handleAddBoardForm}>
-                        <MdOutlinePostAdd /> Nueva tablita
-                    </button>
+                    <div className="Home__LeftButtons">
+                        <Button onClick={handleAddBoardForm}>
+                            <MdOutlinePostAdd /> Nueva tablita
+                        </Button>
+                    </div>
                 </div>
                 <div className="BoardContainer">
                     {state.boards.filter(filterBoardsByName(searchedValue)).map((board) => (

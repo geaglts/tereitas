@@ -2,7 +2,7 @@ import { useState } from 'react';
 import uuid from '@utils/uuid';
 
 const initialState = {
-    darkTheme: false,
+    darkTheme: true,
     boards: [],
 };
 

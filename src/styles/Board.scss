@@ -1,37 +1,32 @@
-@use 'vars';
+@use 'vars' as *;
 @import 'animations';
 
 .Board {
+    background-color: var(--color-light);
+    color: var(--color-dark);
     display: grid;
     grid-template-rows: auto auto 1fr;
-    border: 1px solid var(--color-green);
     border-radius: 4px;
     padding: 10px;
 
     .Board__Header {
         display: grid;
         grid-template-columns: auto auto;
-        grid-template-rows: auto auto 50px;
+        grid-template-rows: auto auto;
         grid-template-areas:
             'title delete'
-            'description description'
-            'add-task add-task';
+            'description description';
         gap: 12px;
 
         h2 {
             grid-area: title;
             font-family: var(--font-secondary);
             font-size: var(--font-size-lg);
-            &::first-letter {
-                color: var(--color-green);
-                text-transform: capitalize;
-            }
         }
 
         .RemoveBoard__Button {
             grid-area: delete;
             justify-self: end;
-            color: AddTask__Button;
             padding: 4px 3px 4px 4px;
             font-size: var(--font-size-md);
             cursor: pointer;
@@ -55,7 +50,7 @@
             font-weight: 400;
             color: var(--color-dark);
             display: grid;
-            grid-template-columns: 1fr auto;
+            grid-template-columns: 1fr auto auto;
             align-items: center;
             column-gap: 8px;
 
@@ -76,7 +71,7 @@
                     position: absolute;
                     width: 100%;
                     height: 100%;
-                    background-color: rgba(#59d183, 0.3);
+                    background-color: rgba($color-cream, 0.3);
                     transform: translate(-150px);
                     transition: all 450ms ease;
                 }
@@ -112,30 +107,13 @@
                 }
             }
         }
+    }
 
-        .AddTask__Button {
-            grid-area: add-task;
-            border: none;
-            align-self: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: transparent;
-            font-size: var(--font-size-sm);
-            background-color: var(--color-green);
-            color: var(--color-dark);
-            padding: 12px 0;
-            cursor: pointer;
-            border-radius: 8px;
-            height: 40px;
-
-            svg {
-                margin-right: 4px;
-            }
-
-            &:hover {
-                outline: 2px solid var(--color-light);
-            }
+    .NewTaskContainer {
+        display: flex;
+        justify-content: flex-end;
+        button {
+            width: auto;
         }
     }
 
@@ -223,12 +201,13 @@
         .Board__Header {
             gap: 8px;
             .description {
-                color: var(--color-light);
+                color: var(--color-dark);
                 .ClearAll {
                     &__content {
-                        color: var(--color-light);
+                        $color-dark: var(--color-dark);
+                        color: $color-dark;
                         svg {
-                            color: var(--color-light);
+                            color: $color-dark;
                         }
                     }
                 }

@@ -27,11 +27,14 @@ module.exports = {
         },
     },
     devtool: 'source-map',
-    devServer: { port: 3000, historyApiFallback: true, open: false, allowedHosts: ['localhost', 'wsl'] },
+    devServer: { port: 3001, historyApiFallback: true, open: false, allowedHosts: ['localhost', 'wsl'] },
     module: {
         rules: [
             { test: /\jsx?$/, exclude: /node_modules/, use: ['babel-loader'] },
-            { test: /\.s?css$/, use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'] },
+            {
+                test: /\.s?css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+            },
             { test: /\.(jpg|jpeg|png|gif|mp3|svg)$/, use: ['file-loader'] },
         ],
     },

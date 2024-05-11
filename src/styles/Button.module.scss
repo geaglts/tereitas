@@ -1,0 +1,14 @@
+@use 'vars' as *;
+
+.container {
+    background-color: $color-cream;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: var(--font-size-md);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 100%;
+}

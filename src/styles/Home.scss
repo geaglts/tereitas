@@ -4,10 +4,7 @@
     h1 {
         letter-spacing: 1px;
         font-size: var(--font-size-xlg);
-        font-family: var(--font-secondary);
-        &::first-letter {
-            color: var(--color-blue);
-        }
+        font-family: var(--font-primary);
     }
 
     p {
@@ -17,41 +14,21 @@
 }
 
 .Actions {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
+    display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: 12px;
     margin: 20px 0;
 
-    .Actions__NewBoard {
-        justify-self: end;
-        height: 40px;
-        width: 180px;
-        border-radius: 5px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: var(--font-size-md);
-        border: none;
-        background-color: transparent;
-        cursor: pointer;
-        background-color: var(--color-green);
-        color: var(--color-dark);
-
-        svg {
-            font-size: 18pt;
-            margin-right: 5px;
-        }
-
-        &:hover {
-            opacity: 0.8;
-        }
+    .Home__LeftButtons {
+        width: 250px;
     }
 }
 
 .BoardContainer {
-    --card-size: 300px;
+    --card-size: 400px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(var(--card-size), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(var(--card-size), 1fr));
     grid-auto-rows: auto;
     place-content: center;
     gap: 20px;
